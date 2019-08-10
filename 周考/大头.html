@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var canvas = document.createElement('canvas');
+        canvas.width = 500;
+        canvas.height = 500;
+        canvas.style.border = '1px solid #ccc';
+        document.body.appendChild(canvas);
+        var ctx = canvas.getContext('2d');
+        function header(){
+            ctx.beginPath();
+            ctx.fillStyle = 'yellow';
+            ctx.moveTo(200, 230);
+            ctx.arc(200, 200, 180, -25, -Math.PI * 360);
+            ctx.fill();
+            ctx.beginPath();
+            ctx.lineWidth = 4;
+            ctx.moveTo(155, 30);
+            ctx.lineTo(155, 60);
+            ctx.moveTo(140, 30);
+            ctx.lineTo(140, 60);
+            ctx.moveTo(170, 30);
+            ctx.lineTo(170, 60);
+            ctx.moveTo(185, 30);
+            ctx.lineTo(185, 60);
+            ctx.moveTo(200, 30);
+            ctx.lineTo(200, 60);
+            ctx.moveTo(215, 30);
+            ctx.lineTo(215, 60);
+            ctx.moveTo(230, 30);
+            ctx.lineTo(230, 60);
+            ctx.moveTo(245, 30);
+            ctx.lineTo(245, 60);
+            ctx.stroke();
+        }
+        function eys(){
+            ctx.beginPath();
+            ctx.moveTo(260, 160);
+            ctx.fillStyle = 'white';
+            ctx.arc(260, 140, 18, 0, -Math.PI * 360);
+            ctx.fill();
+            ctx.beginPath();
+
+            ctx.moveTo(270, 100);
+            ctx.fillStyle = 'black';
+            ctx.arc(270, 145, 8, 0, -Math.PI * 360);
+            ctx.fill();
+        }
+        header();
+        eys();
+
+
+        // 圆圈
+        var data = [
+            { value: 335, name: '直接访问', color: "rgb(213, 58, 53)" },
+            { value: 310, name: '邮件营销', color: "rgb(51, 75, 92)" },
+            { value: 234, name: '联盟广告', color: "rgb(106, 176, 184)" },
+            { value: 135, name: '视频广告', color: "rgb(233, 143, 111)" },
+            { value: 1548, name: '搜索引擎', color: "rgb(145, 199, 174)" }
+        ]
+
+        var canvas = document.createElement('canvas');
+        canvas.width = 500;
+        canvas.height = 500;
+        canvas.style.border = '1px solid #ccc';
+        document.body.appendChild(canvas);
+        var ctx = canvas.getContext('2d');
+
+
+        ctx.save();
+        ctx.beginPath();
+        ctx.arc(250, 250, 150, 0, pi * 360);
+        ctx.fill();
+        ctx.restore();
+
+        var arr = [];
+        for (var i = 0; i < data.length; i++) {
+            arr.push(data[i].value);
+        }
+        // console.log(arr)
+        var sum = arr.reduce(function (a, b) {
+            return a + b;
+        })
+        // console.log(sum)
+        var degArr = arr.map(function (item) {
+            return (item / sum * 360);
+        })
+        // console.log(degArr);
+        var pi = Math.PI / 180;
+
+
+        var startDeg = 0;
+        for (i = 0; i < degArr.length; i++) {
+            ctx.save();
+            ctx.beginPath();
+            var endDeg = degArr[i];
+            ctx.fillStyle = data[i].color;
+            ctx.moveTo(250, 250);
+            ctx.arc(250, 250, 150, startDeg * pi, -(startDeg + endDeg) * pi);
+            ctx.fill();
+            ctx.restore();
+            ctx.closePath();
+            startDeg += endDeg;
+            console.log(startDeg * pi)
+        }
+
+        ctx.beginPath();
+        ctx.fillStyle = 'white';
+        ctx.arc(250, 250, 110, 0, pi * 360);
+        ctx.fill();
+        ctx.stroke();
+
+
+
+    </script>
+</body>
+</html>
